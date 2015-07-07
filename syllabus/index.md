@@ -41,7 +41,7 @@ Remember that additional notes, links, etc. will be found on [the Etherpad](http
 4. [Conflicts](git-03-conflict.html)
 5. [Open science](git-04-open.html)
 
-[**Git Reference Sheet**](git_reference.md)
+[**Git Reference Sheet**](git_reference.html)
 
 ### R (day 2)
 
