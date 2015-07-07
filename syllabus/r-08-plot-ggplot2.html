@@ -49,11 +49,12 @@
 <p>Today we’ll be learning about the ggplot2 package, because it is the most effective for creating publication quality graphics.</p>
 <p>ggplot2 is built on the grammar of graphics, the idea that any plot can be expressed from the same set of components: a <strong>data</strong> set, a <strong>coordinate system</strong>, and a set of <strong>geoms</strong>–the visual representation of data points.</p>
 <p>The key to understanding ggplot2 is thinking about a figure in layers: just like you might do in an image editing program like Photoshop, Illustrator, or Inkscape.</p>
-<p>Let’s start off with an example:</p>
+<p>Let’s start off with an example. Start with loading in our gapminder data:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+gapminder &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/gapminder-FiveYearData.csv&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)
 <span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder, <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap)) +
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
-<p><img src="fig/08-plot-ggplot2-lifeExp-vs-gdpPercap-scatter-1.png" title="plot of chunk lifeExp-vs-gdpPercap-scatter" alt="plot of chunk lifeExp-vs-gdpPercap-scatter" style="display: block; margin: auto;" /></p>
+<p><img src="fig/08-plot-ggplot2-lifeExp-vs-gdpPercap-scatter-1.png" title="plot of chunk lifeExp-vs-gdpPercap-scatter" alt="plot of chunk lifeExp-vs-gdpPercap-scatter" style="display: block; margin: auto;" /> (Note that read.csv is a shorthand function for read.table. Also see how tab-complete works to get things in subdirectories.)</p>
 <p>So the first thing we do is call the <code>ggplot</code> function. This function lets R know that we’re creating a new plot, and any of the arguments we give the <code>ggplot</code> function are the <em>global</em> options for the plot: they apply to all layers on the plot.</p>
 <p>We’ve passed in two arguments to <code>ggplot</code>. First, we tell <code>ggplot</code> what data we want to show on our figure, in this example the gapminder data we read in earlier. For the second argument we passed in the <code>aes</code> function, which tells <code>ggplot</code> how variables in the <strong>data</strong> map to <em>aesthetic</em> properties of the figure, in this case the <strong>x</strong> and <strong>y</strong> locations. Here we told <code>ggplot</code> we want to plot the “lifeExp” column of the gapminder data frame on the x-axis, and the “gdpPercap” column on the y-axis. Notice that we didn’t need to explicitly pass <code>aes</code> these columns (e.g. <code>x = gapminder[, &quot;lifeExp&quot;]</code>), this is because <code>ggplot</code> is smart enough to know to look in the <strong>data</strong> for that column!</p>
 <p>By itself, the call to <code>ggplot</code> isn’t enough to draw a figure:</p>
@@ -105,6 +106,35 @@
 <p>Switch the order of the point and line layers from the previous example. What happened?</p>
 </div>
 </section>
+<h3 id="saving-plots">Saving plots</h3>
+<p>You can assign a plot to a variable, and change it later:</p>
+<pre><code>myplot &lt;- ggplot(data = gapminder, aes(x=year, y=lifeExp, by=country))
+myplot &lt;- myplot + geom_line(aes(color=continent)) + geom_point()
+myplot</code></pre>
+<p>To save the most recent plot you create in <code>ggplot2</code>, use the command <code>ggsave</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggsave</span>(<span class="st">&quot;My_most_recent_plot.pdf&quot;</span>) </code></pre>
+<p>or</p>
+<pre><code>ggsave(&quot;myplot.png&quot;, myplot)</code></pre>
+<p>You can save a plot from within RStudio using the ‘Export’ button in the ‘Plot’ window. This will give you the option of saving as a .pdf or as .png, .jpg or other image formats.</p>
+<p>Sometimes you will want to save plots without creating them in the ‘Plot’ window first. Perhaps you want to make a pdf document with multiple pages: each one a different plot, for example. Or perhaps you’re looping through multiple subsets of a file, plotting data from each subset, and you want to save each plot, but obviously can’t stop the loop to click ‘Export’ for each one.</p>
+<p>In this case you can use a more flexible approach. The function <code>pdf</code> creates a new pdf device. You can control the size and resolution using the arguments to this function.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pdf</span>(<span class="st">&quot;Life_Exp_vs_time.pdf&quot;</span>, <span class="dt">width=</span><span class="dv">12</span>, <span class="dt">height=</span><span class="dv">4</span>)
+<span class="kw">ggplot</span>(<span class="dt">data=</span>gapminder, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>lifeExp, <span class="dt">colour=</span>country)) +
+<span class="st">  </span><span class="kw">geom_line</span>()
+
+<span class="co"># You then have to make sure to turn off the pdf device!</span>
+
+<span class="kw">dev.off</span>()</code></pre>
+<p>Open up this document and have a look.</p>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h4><span class="glyphicon glyphicon-pencil"></span>Challenge</h4>
+</div>
+<div class="panel-body">
+<p>Rewrite your ‘pdf’ command to print a differnt plot on a second page second page in the pdf, plotting per-capital GDP instead of life expectancy.</p>
+</div>
+</section>
+<p>The commands <code>jpeg</code>, <code>png</code> etc. are used similarly to produce documents in different formats.</p>
 <h3 id="transformations-and-statistics">Transformations and statistics</h3>
 <p>Ggplot also makes it easy to overlay statistical models over the data. To demonstrate we’ll go back to our first example:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder, <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap, <span class="dt">color=</span>continent)) +
@@ -155,7 +185,11 @@
 </div>
 <div class="panel-body">
 <p>Create a density plot of GDP per capita, filled by continent.</p>
-<p>Advanced: - Transform the x axis to better visualise the data spread. - Add a facet layer to panel the density plots by year.</p>
+<p>Advanced:</p>
+<ul>
+<li>Transform the x axis to better visualise the data spread.</li>
+<li>Add a facet layer to panel the density plots by year.</li>
+</ul>
 </div>
 </section>
 <h2 id="challenge-solutions">Challenge solutions</h2>
@@ -211,7 +245,11 @@
 </div>
 <div class="panel-body">
 <p>Create a density plot of GDP per capita, filled by continent.</p>
-<p>Advanced: - Transform the x axis to better visualise the data spread. - Add a facet layer to panel the density plots by year.</p>
+<p>Advanced:</p>
+<ul>
+<li>Transform the x axis to better visualise the data spread.</li>
+<li>Add a facet layer to panel the density plots by year.</li>
+</ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> gapminder, <span class="kw">aes</span>(<span class="dt">x =</span> gdpPercap, <span class="dt">fill=</span>continent)) +
 <span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha=</span><span class="fl">0.6</span>) +<span class="st"> </span><span class="kw">facet_wrap</span>( ~<span class="st"> </span>year) +<span class="st"> </span><span class="kw">scale_x_log10</span>()</code></pre>
 <p><img src="fig/08-plot-ggplot2-ch5-sol-1.png" title="plot of chunk ch5-sol" alt="plot of chunk ch5-sol" style="display: block; margin: auto;" /></p>

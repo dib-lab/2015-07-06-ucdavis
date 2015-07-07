@@ -26,5 +26,3 @@ Feel free to collaborate!
 8. Compile the final .Rmd file to HTML, make sure it looks ok, and then commit
    this HTML file (plus figures) and push everything to GitHub.
 
-
-(Thanks to [Naupaka](http://naupaka.github.io/2015-02-21-iplant/))

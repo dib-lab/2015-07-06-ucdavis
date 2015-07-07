@@ -63,7 +63,7 @@ pages.
 Within R Studio, click File &rarr; New File &rarr; R Markdown and
 you'll get a dialog box like this:
 
-![](fig/New_R_Markdown.png)<br/>
+![](img/New_R_Markdown.png)<br/>
 
 You can stick with the default (HTML output), but give it a title.
 
@@ -167,13 +167,20 @@ with some number of `#` symbols:
 #### Sub-sub section
 ```
 
-You _compile_ the R Markdown document to an html webpage by clicking
+You _compile_ the R Markdown document, we use the R Markdown package:
+
+```
+library(rmarkdown)
+render('myfile.Rmd')
+```
+
+You can also do this by by clicking
 the "Knit HTML" in the upper-left. And note the little question mark
 next to it; click the question mark and you'll get a "Markdown Quick
 Reference" (with the Markdown syntax) as well to the RStudio
 documentation on R Markdown.
 
-> ### Challenge {.challenge}
+> #### Challenge {.challenge}
 >
 > Create a new R Markdown document. Delete all of the R code chunks
 > and write a bit of Markdown (some sections, some italicized
@@ -223,7 +230,7 @@ a name, as they will help you to fix errors and, if any graphs are
 produced, the file names are based on the name of the code chunk that
 produced them.
 
-> ### Challenge {.challenge}
+> #### Challenge {.challenge}
 >
 > Add code chunks to
 >
@@ -290,7 +297,7 @@ want to use `fig.path` to define separate prefixes for the figure file
 names, like `fig.path="Figs/cleaning-"` and `fig.path="Figs/analysis-"`.
 
 
-> ### Challenge {.challenge}
+> #### Challenge {.challenge}
 >
 > Use chunk options to control the size of a figure and to hide the
 > code.
@@ -317,7 +324,7 @@ The
 function in my [R/broman](https://github.com/kbroman) package handles
 this.
 
-> ### Challenge {.challenge}
+> #### Challenge {.challenge}
 >
 > Try out a bit of in-line R code.
 

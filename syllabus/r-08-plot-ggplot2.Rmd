@@ -10,7 +10,7 @@ source("tools/chunk-options.R")
 opts_chunk$set(fig.path = "fig/08-plot-ggplot2-")
 opts_chunk$set(error = TRUE)
 # Silently load in the data so the rest of the lesson works
-gapminder <- read.csv("data/gapminder-FiveYearData.csv", header=TRUE)
+
 ```
 
 > ## Learning objectives {.objectives}
@@ -49,13 +49,16 @@ The key to understanding ggplot2 is thinking about a figure in layers: just like
 you might do in an image editing program like Photoshop, Illustrator, or
 Inkscape.
 
-Let's start off with an example:
+Let's start off with an example.  Start with loading in our gapminder data:
 
 ```{r lifeExp-vs-gdpPercap-scatter, message=FALSE}
 library(ggplot2)
+gapminder <- read.csv("data/gapminder-FiveYearData.csv", header=TRUE)
 ggplot(data = gapminder, aes(x = lifeExp, y = gdpPercap)) +
   geom_point()
 ```
+(Note that read.csv is a shorthand function for read.table.  Also see how
+tab-complete works to get things in subdirectories.)
 
 So the first thing we do is call the `ggplot` function. This function lets R
 know that we're creating a new plot, and any of the arguments we give the
@@ -204,9 +207,8 @@ Open up this document and have a look.
 
 > #### Challenge {.challenge}
 >
-> Rewrite your 'pdf' command to print a second
-> page in the pdf, showing a facet plot (hint: use `facet_grid`)
-> of the same data with one panel per continent.
+> Rewrite your 'pdf' command to print a differnt plot on a second page second
+> page in the pdf, plotting per-capital GDP instead of life expectancy.
 >
 
 
@@ -320,6 +322,7 @@ code to modify!
 > Create a density plot of GDP per capita, filled by continent.
 >
 > Advanced:
+>
 >  - Transform the x axis to better visualise the data spread.
 >  - Add a facet layer to panel the density plots by year.
 >
@@ -383,6 +386,7 @@ code to modify!
 > Create a density plot of GDP per capita, filled by continent.
 >
 > Advanced:
+>
 >  - Transform the x axis to better visualise the data spread.
 >  - Add a facet layer to panel the density plots by year.
 >

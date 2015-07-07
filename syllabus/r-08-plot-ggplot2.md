@@ -43,16 +43,19 @@ The key to understanding ggplot2 is thinking about a figure in layers: just like
 you might do in an image editing program like Photoshop, Illustrator, or
 Inkscape.
 
-Let's start off with an example:
+Let's start off with an example.  Start with loading in our gapminder data:
 
 
 ~~~{.r}
 library(ggplot2)
+gapminder <- read.csv("data/gapminder-FiveYearData.csv", header=TRUE)
 ggplot(data = gapminder, aes(x = lifeExp, y = gdpPercap)) +
   geom_point()
 ~~~
 
 <img src="fig/08-plot-ggplot2-lifeExp-vs-gdpPercap-scatter-1.png" title="plot of chunk lifeExp-vs-gdpPercap-scatter" alt="plot of chunk lifeExp-vs-gdpPercap-scatter" style="display: block; margin: auto;" />
+(Note that read.csv is a shorthand function for read.table.  Also see how
+tab-complete works to get things in subdirectories.)
 
 So the first thing we do is call the `ggplot` function. This function lets R
 know that we're creating a new plot, and any of the arguments we give the
@@ -170,6 +173,69 @@ lines.
 > happened?
 >
 
+### Saving plots
+
+You can assign a plot to a variable, and change it later:
+
+```
+myplot <- ggplot(data = gapminder, aes(x=year, y=lifeExp, by=country))
+myplot <- myplot + geom_line(aes(color=continent)) + geom_point()
+myplot
+```
+
+To save the most recent plot you create in `ggplot2`,
+use the command `ggsave`:
+
+
+~~~{.r}
+ggsave("My_most_recent_plot.pdf") 
+~~~
+
+or
+
+```
+ggsave("myplot.png", myplot)
+```
+
+You can save a plot from within RStudio using the 'Export' button
+in the 'Plot' window. This will give you the option of saving as a
+.pdf or as .png, .jpg or other image formats.
+
+Sometimes you will want to save plots without creating them in the
+'Plot' window first. Perhaps you want to make a pdf document with
+multiple pages: each one a different plot, for example. Or perhaps
+you're looping through multiple subsets of a file, plotting data from
+each subset, and you want to save each plot, but obviously can't stop
+the loop to click 'Export' for each one.
+
+In this case you can use a more flexible approach. The function
+`pdf` creates a new pdf device. You can control the size and resolution
+using the arguments to this function.
+
+
+~~~{.r}
+pdf("Life_Exp_vs_time.pdf", width=12, height=4)
+ggplot(data=gapminder, aes(x=year, y=lifeExp, colour=country)) +
+  geom_line()
+
+# You then have to make sure to turn off the pdf device!
+
+dev.off()
+~~~
+
+Open up this document and have a look.
+
+> #### Challenge {.challenge}
+>
+> Rewrite your 'pdf' command to print a differnt plot on a second page second
+> page in the pdf, plotting per-capital GDP instead of life expectancy.
+>
+
+
+The commands `jpeg`, `png` etc. are used similarly to produce
+documents in different formats.
+
+
 ### Transformations and statistics
 
 Ggplot also makes it easy to overlay statistical models over the data. To
@@ -278,7 +344,6 @@ ggplot(data = gapminder, aes(x = year, y = lifeExp, color=continent)) +
 
 <img src="fig/08-plot-ggplot2-theme-1.png" title="plot of chunk theme" alt="plot of chunk theme" style="display: block; margin: auto;" />
 
-
 This is just a taste of what you can do with `ggplot2`. RStudio provides a
 really useful [cheat sheet][cheat] of the different layers available, and more
 extensive documentation is available on the [ggplot2 website][ggplot-doc].
@@ -295,6 +360,7 @@ code to modify!
 > Create a density plot of GDP per capita, filled by continent.
 >
 > Advanced:
+>
 >  - Transform the x axis to better visualise the data spread.
 >  - Add a facet layer to panel the density plots by year.
 >
@@ -370,6 +436,7 @@ code to modify!
 > Create a density plot of GDP per capita, filled by continent.
 >
 > Advanced:
+>
 >  - Transform the x axis to better visualise the data spread.
 >  - Add a facet layer to panel the density plots by year.
 >

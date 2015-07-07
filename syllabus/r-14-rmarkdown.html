@@ -54,7 +54,7 @@
 <p>knitr allows you to mix basically any sort of text with any sort of code, but we recommend that you use R Markdown, which mixes Markdown with R. Markdown is a light-weight mark-up language for creating web pages.</p>
 <h3 id="creating-an-r-markdown-file">Creating an R Markdown file</h3>
 <p>Within R Studio, click File → New File → R Markdown and you’ll get a dialog box like this:</p>
-<p><img src="fig/New_R_Markdown.png" /><br/></p>
+<p><img src="img/New_R_Markdown.png" /><br/></p>
 <p>You can stick with the default (HTML output), but give it a title.</p>
 <h3 id="basic-components-of-r-markdown">Basic components of R Markdown</h3>
 <p>The initial chunk of text contains instructions for R: you give the thing a title, author, and date, and tell it that you’re going to want to produce html output (in other words, a web page).</p>
@@ -107,10 +107,13 @@ summary(cars)
 ## Main section
 ### Sub-section
 #### Sub-sub section</code></pre>
-<p>You <em>compile</em> the R Markdown document to an html webpage by clicking the “Knit HTML” in the upper-left. And note the little question mark next to it; click the question mark and you’ll get a “Markdown Quick Reference” (with the Markdown syntax) as well to the RStudio documentation on R Markdown.</p>
+<p>You <em>compile</em> the R Markdown document, we use the R Markdown package:</p>
+<pre><code>library(rmarkdown)
+render(&#39;myfile.Rmd&#39;)</code></pre>
+<p>You can also do this by by clicking the “Knit HTML” in the upper-left. And note the little question mark next to it; click the question mark and you’ll get a “Markdown Quick Reference” (with the Markdown syntax) as well to the RStudio documentation on R Markdown.</p>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h3><span class="glyphicon glyphicon-pencil"></span>Challenge</h3>
+<h4><span class="glyphicon glyphicon-pencil"></span>Challenge</h4>
 </div>
 <div class="panel-body">
 <p>Create a new R Markdown document. Delete all of the R code chunks and write a bit of Markdown (some sections, some italicized text, and an itemized list).</p>
@@ -134,7 +137,7 @@ gapminder <- read.csv("~/Desktop/gapminder-FiveYearData.csv")
 <p>That is, you place a chunk of R code between <code>```{r chunk_name}</code> and <code>```</code>. It’s a good idea to give each chunk a name, as they will help you to fix errors and, if any graphs are produced, the file names are based on the name of the code chunk that produced them.</p>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h3><span class="glyphicon glyphicon-pencil"></span>Challenge</h3>
+<h4><span class="glyphicon glyphicon-pencil"></span>Challenge</h4>
 </div>
 <div class="panel-body">
 <p>Add code chunks to</p>
@@ -176,7 +179,7 @@ knitr::opts_chunk$set(fig.path="Figs/", message=FALSE, warning=FALSE,
 <p>If you have multiple R Markdown files in a common directory, you might want to use <code>fig.path</code> to define separate prefixes for the figure file names, like <code>fig.path=&quot;Figs/cleaning-&quot;</code> and <code>fig.path=&quot;Figs/analysis-&quot;</code>.</p>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h3><span class="glyphicon glyphicon-pencil"></span>Challenge</h3>
+<h4><span class="glyphicon glyphicon-pencil"></span>Challenge</h4>
 </div>
 <div class="panel-body">
 <p>Use chunk options to control the size of a figure and to hide the code.</p>
@@ -190,7 +193,7 @@ knitr::opts_chunk$set(fig.path="Figs/", message=FALSE, warning=FALSE,
 <p>The <a href="https://github.com/kbroman/broman/blob/master/R/myround.R"><code>myround</code></a> function in my <a href="https://github.com/kbroman">R/broman</a> package handles this.</p>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h3><span class="glyphicon glyphicon-pencil"></span>Challenge</h3>
+<h4><span class="glyphicon glyphicon-pencil"></span>Challenge</h4>
 </div>
 <div class="panel-body">
 <p>Try out a bit of in-line R code.</p>
