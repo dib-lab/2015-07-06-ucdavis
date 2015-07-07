@@ -57,4 +57,5 @@ Remember that additional notes, links, etc. will be found on [the Etherpad](http
 
 1   [Writing Functions](r-07-functions.html)
 2.  [Vectorisation](09-vectorisation.html)
-3. [Control flow](12-control-flow.html)
+3.  [Control flow](12-control-flow.html)
+
