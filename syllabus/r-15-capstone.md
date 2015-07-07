@@ -15,9 +15,10 @@ Feel free to collaborate!
    GDP on the y axis. Make sure you load all the libraries you might need
    (dplyr, ggplot2, etc). Describe any trends you see for each country using
    markdown text.
-3. Commit the changes to your .Rmd file using git.
+3. Commit your .Rmd file using git.
 4. For the year 2007, calculate the mean, min, and max life expectancies for
    each continent. Describe what you see in the results using markdown text.
+5. Make a new github repsitory for your R studio project.
 5. Commit your changes using git and push them to GitHub.
 6. Make 2 histograms of global life expectancy using ggplot. One with the
    default bin widths and one with narrower bin widths. Explain the differences
