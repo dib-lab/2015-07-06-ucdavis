@@ -1,7 +1,7 @@
 # Open Science, in brief
 
 * What we've been teaching you (automating data analysis, using
-  version control) is efficient *and* enables open science;
+  version control) both **enhances efficiency** *and* **enables open science**;
 
 * Open Science is basically about opening up the *process* and
   *results* of science so that others can easily build on what you've
