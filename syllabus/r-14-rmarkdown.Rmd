@@ -66,7 +66,7 @@ pages.
 Within R Studio, click File &rarr; New File &rarr; R Markdown and
 you'll get a dialog box like this:
 
-![](img/New_R_Markdown.png)<br/>
+![](fig/New_R_Markdown.png)<br/>
 
 You can stick with the default (HTML output), but give it a title.
 
@@ -170,7 +170,14 @@ with some number of `#` symbols:
 #### Sub-sub section
 ```
 
-You _compile_ the R Markdown document to an html webpage by clicking
+You _compile_ the R Markdown document, we use the R Markdown package:
+
+```
+library(rmarkdown)
+render('myfile.Rmd')
+```
+
+You can also do this by by clicking
 the "Knit HTML" in the upper-left. And note the little question mark
 next to it; click the question mark and you'll get a "Markdown Quick
 Reference" (with the Markdown syntax) as well to the RStudio

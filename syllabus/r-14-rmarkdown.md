@@ -63,7 +63,7 @@ pages.
 Within R Studio, click File &rarr; New File &rarr; R Markdown and
 you'll get a dialog box like this:
 
-![](img/New_R_Markdown.png)<br/>
+![](fig/New_R_Markdown.png)<br/>
 
 You can stick with the default (HTML output), but give it a title.
 

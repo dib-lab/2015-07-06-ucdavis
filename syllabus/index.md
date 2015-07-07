@@ -50,8 +50,11 @@ Remember that additional notes, links, etc. will be found on [the Etherpad](http
 1.  [Plotting](r-08-plot-ggplot2.html) 
 2.  [R Markdown](r-14-rmarkdown.html)
 3.  [Capstone exercise](r-15-capstone.html)
-<!-- 7.  [Functions](r-07-functions.html)
-9.  [Vectorisation](09-vectorisation.html)
-10. [Control flow](12-control-flow.html) -->
 
 [**R Reference Sheet**](r-reference.html)
+
+#### Other R Topics
+
+1   [Writing Functions](r-07-functions.html)
+2.  [Vectorisation](09-vectorisation.html)
+3. [Control flow](12-control-flow.html)

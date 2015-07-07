@@ -8,6 +8,7 @@ minutes: 70
 ```{r, include=FALSE}
 source("tools/chunk-options.R")
 opts_chunk$set(fig.path = "fig/08-plot-ggplot2-")
+opts_chunk$set(error = TRUE)
 # Silently load in the data so the rest of the lesson works
 gapminder <- read.csv("data/gapminder-FiveYearData.csv", header=TRUE)
 ```
@@ -151,6 +152,68 @@ lines.
 > happened?
 >
 
+### Saving plots
+
+You can assign a plot to a variable, and change it later:
+
+```
+myplot <- ggplot(data = gapminder, aes(x=year, y=lifeExp, by=country))
+myplot <- myplot + geom_line(aes(color=continent)) + geom_point()
+myplot
+```
+
+To save the most recent plot you create in `ggplot2`,
+use the command `ggsave`:
+
+```{r, eval=FALSE}
+ggsave("My_most_recent_plot.pdf") 
+```
+
+or
+
+```
+ggsave("myplot.png", myplot)
+```
+
+You can save a plot from within RStudio using the 'Export' button
+in the 'Plot' window. This will give you the option of saving as a
+.pdf or as .png, .jpg or other image formats.
+
+Sometimes you will want to save plots without creating them in the
+'Plot' window first. Perhaps you want to make a pdf document with
+multiple pages: each one a different plot, for example. Or perhaps
+you're looping through multiple subsets of a file, plotting data from
+each subset, and you want to save each plot, but obviously can't stop
+the loop to click 'Export' for each one.
+
+In this case you can use a more flexible approach. The function
+`pdf` creates a new pdf device. You can control the size and resolution
+using the arguments to this function.
+
+```{r, eval=FALSE}
+pdf("Life_Exp_vs_time.pdf", width=12, height=4)
+ggplot(data=gapminder, aes(x=year, y=lifeExp, colour=country)) +
+  geom_line()
+
+# You then have to make sure to turn off the pdf device!
+
+dev.off()
+```
+
+Open up this document and have a look.
+
+> #### Challenge {.challenge}
+>
+> Rewrite your 'pdf' command to print a second
+> page in the pdf, showing a facet plot (hint: use `facet_grid`)
+> of the same data with one panel per continent.
+>
+
+
+The commands `jpeg`, `png` etc. are used similarly to produce
+documents in different formats.
+
+
 ### Transformations and statistics
 
 Ggplot also makes it easy to overlay statistical models over the data. To
@@ -240,7 +303,6 @@ ggplot(data = gapminder, aes(x = year, y = lifeExp, color=continent)) +
   scale_fill_discrete(name="Continent") +
   theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
 ```
-
 
 This is just a taste of what you can do with `ggplot2`. RStudio provides a
 really useful [cheat sheet][cheat] of the different layers available, and more
